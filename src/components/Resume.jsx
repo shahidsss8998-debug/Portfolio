@@ -19,7 +19,7 @@ const Resume = () => {
             Work Experience
           </h2>
           <a
-            href="Shahidcv.pdf"
+            href="/Shahidcv.pdf"
             className="flex items-center gap-2 px-6 py-2 rounded-full bg-slate-800 border border-slate-700 hover:border-purple-500 text-slate-300 hover:text-white transition-all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
