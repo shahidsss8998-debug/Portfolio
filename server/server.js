@@ -7,11 +7,16 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+let BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+let CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
+
+// Normalize URLs by trimming trailing slashes
+if (BASE_URL.endsWith('/')) BASE_URL = BASE_URL.slice(0, -1);
+if (CORS_ORIGIN.endsWith('/')) CORS_ORIGIN = CORS_ORIGIN.slice(0, -1);
 
 app.use(express.json());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173'
+  origin: CORS_ORIGIN
 }));
 
 // ─── Reply Templates ────────────────────────────────────────────────
