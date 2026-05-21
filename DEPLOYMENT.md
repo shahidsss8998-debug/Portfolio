@@ -64,34 +64,46 @@ First, you need to commit all your local changes (including the backend server a
 
 ---
 
-## Step 3: Deploy the Frontend on Vercel
+## Step 3: Deploy the Frontend on Netlify
 
-[Vercel](https://vercel.com) is the creators of Next.js and provides the fastest, easiest hosting for Vite/React applications.
+[Netlify](https://www.netlify.com) is an excellent platform for deploying static Vite/React applications.
 
-1. **Sign Up / Log In**: Go to [Vercel](https://vercel.com) and sign up with GitHub.
-2. **Import Project**: Click **Add New** -> **Project**, then click **Import** next to your `Portfolio` repository.
-3. **Configure Project**:
-   - **Framework Preset**: `Vite` (Vercel automatically detects this)
-   - **Root Directory**: `./` (Keep it as the root directory, since the frontend files are in the root)
-   - **Build and Output Settings**: Keep default settings:
-     - Build Command: `npm run build`
-     - Output Directory: `dist`
-     - Install Command: `npm install`
-4. **Add Environment Variables**:
-   Under **Environment Variables**, add:
-   - **Key**: `VITE_API_URL`
-   - **Value**: *Your Deployed Render URL* (e.g. `https://portfolio-backend.onrender.com`)
-5. Click **Deploy**. Vercel will build your static assets and publish them in a few seconds!
+1. **Sign Up / Log In**: Go to [Netlify](https://www.netlify.com) and log in with your GitHub account.
+2. **Import from GitHub**: Click the **Add new site** button on your dashboard and select **Import an existing project**.
+3. **Connect Git Provider**: Select **GitHub** and authorize Netlify. Choose your `Portfolio` repository from the list.
+4. **Configure Build Settings**:
+   - **Branch to deploy**: `main`
+   - **Base directory**: Leave blank (root directory `./`)
+   - **Build command**: `npm run build`
+   - **Publish directory**: `dist`
+5. **Add Environment Variables**:
+   - Expand the **Environment variables** section (or click **Add environment variable**).
+   - Click **New variable** and add:
+     * **Key**: `VITE_API_URL`
+     * **Value**: *Your Deployed Render URL* (e.g., `https://portfolio-backend.onrender.com`)
+6. **Deploy**: Click **Deploy [site-name]**. Netlify will build your project and give you a live URL in about a minute.
+
+---
+
+## Alternative Step 3: Deploy the Frontend on Vercel
+
+If you prefer Vercel:
+1. Go to [Vercel](https://vercel.com) and sign up with GitHub.
+2. Click **Add New** -> **Project** and **Import** your repository.
+3. Keep the default settings (Root: `./`, Build: `npm run build`, Output: `dist`).
+4. Under **Environment Variables**, add `VITE_API_URL` with your Render backend URL.
+5. Click **Deploy**.
 
 ---
 
 ## Step 4: Link CORS Origin (Final Polish)
 
-Once both websites are live:
-1. Copy your frontend URL from Vercel (e.g., `https://portfolio-three-gamma.vercel.app`).
+Once both your frontend (Netlify/Vercel) and backend (Render) are live:
+1. Copy your frontend URL from Netlify (e.g., `https://your-site-name.netlify.app`).
 2. Go to your backend dashboard on **Render**.
 3. Under the **Environment** tab, find `CORS_ORIGIN`.
-4. Update its value to your Vercel URL (make sure it matches exactly, e.g., no trailing slash: `https://portfolio-three-gamma.vercel.app`).
-5. Save changes. Render will automatically redeploy the backend with the new setting.
+4. Update its value to your Netlify URL (make sure it matches exactly, e.g., `https://your-site-name.netlify.app` with no trailing slash).
+5. Save changes. Render will automatically redeploy the backend with the updated CORS policy.
 
 🎉 **All done! Your portfolio is now online and fully functional!**
+
