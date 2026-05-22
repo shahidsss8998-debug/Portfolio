@@ -8,15 +8,28 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 let BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
-let CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
+let CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:5174';
 
 // Normalize URLs by trimming trailing slashes
 if (BASE_URL.endsWith('/')) BASE_URL = BASE_URL.slice(0, -1);
-if (CORS_ORIGIN.endsWith('/')) CORS_ORIGIN = CORS_ORIGIN.slice(0, -1);
+
+// Split allowed origins by comma, trim whitespace, and remove trailing slashes
+const allowedOrigins = CORS_ORIGIN.split(',')
+  .map(origin => origin.trim().replace(/\/$/, ''));
 
 app.use(express.json());
 app.use(cors({
-  origin: CORS_ORIGIN
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+      return callback(null, true);
+    } else {
+      console.log(`CORS Blocked for origin: ${origin}. Allowed origins:`, allowedOrigins);
+      return callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 // ─── Reply Templates ────────────────────────────────────────────────
