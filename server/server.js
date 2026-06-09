@@ -51,7 +51,7 @@ const replyTemplates = {
     body: "I mainly use React, Node.js, Express, and Figma for design. I also work with MongoDB, PostgreSQL, and various deployment tools. Happy to share more details about my workflow!"
   },
   thankyou: {
-    subject: '🙏 Thank You! — Shahid',
+    subject: '😊 Thank You!',
     body: "Thank you so much for reaching out! I really appreciate your kind words and the time you took to write. It means a lot — looking forward to staying connected."
   }
 };
@@ -279,11 +279,12 @@ app.post('/api/contact', async (req, res) => {
 
     const html = buildNotificationEmail({ name, email, message });
 
-    await sendEmail({
+    // Send email asynchronously in the background to improve frontend response time
+    sendEmail({
       to: process.env.EMAIL_USER,
       subject: `📩 New Portfolio Message from ${name}`,
       html
-    });
+    }).catch(err => console.error('❌ Background Email Error:', err));
 
     res.status(200).json({
       success: true,
