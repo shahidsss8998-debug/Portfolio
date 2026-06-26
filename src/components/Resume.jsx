@@ -10,6 +10,13 @@ const Resume = () => {
       certificateLink: '/Certificate of 1 Month Internship.pdf'
     },
     {
+      company: 'Professional Certification',
+      role: 'Microsoft Word Certification',
+      period: 'Self-Paced',
+      description: 'Successfully completed a comprehensive certification in Microsoft Word, demonstrating proficiency in advanced document formatting, styling, and data organization. Gained practical skills in creating professional documents, reports, and templates.',
+      certificateLink: '/MsWord_Certificate.pdf'
+    },
+    {
       company: 'Forage',
       role: 'Software Engineering Job Simulation',
       period: 'June 2026',
