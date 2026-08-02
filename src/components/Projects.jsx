@@ -3,6 +3,14 @@ import React from 'react';
 const Projects = () => {
   const projects = [
     {
+      title: 'BreakTime',
+      description: 'A full-stack, progressive web application (PWA) built for real-time cafe ordering, dynamic admin menu/order management, interactive delivery tracking, and automated multi-provider email notifications.',
+      tags: ['React', 'Node.js', 'Firebase', 'PWA'],
+      image: '/breaktime.png',
+      liveLink: 'https://breaktime0.netlify.app',
+      githubLink: 'https://github.com/shahidsss8998-debug/BreakTime.git',
+    },
+    {
       title: 'Spoonful Restaurant',
       description: 'Designed and deployed a full-stack restaurant ordering platform with email-based order management and backend APIs using JavaScript and Express.js.',
       tags: ['JavaScript', 'React', 'Node.js', 'MongoDB'],
@@ -60,44 +68,52 @@ const Projects = () => {
           Projects
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/50 transition-all hover:scale-[1.02] shadow-lg"
+              className="group bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/50 transition-all hover:scale-[1.02] shadow-lg flex flex-col justify-between"
             >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-3">
-                <h3 className="text-sm font-bold text-white mb-1 line-clamp-1">{project.title}</h3>
-                <p className="text-slate-400 text-[10px] mb-2 line-clamp-2 leading-tight">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1 mb-3">
-                  {project.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[8px] uppercase tracking-wider font-bold text-purple-400 bg-purple-500/10 px-1 py-0.5 rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              <div>
+                <div className="aspect-[16/10] sm:aspect-[4/3] overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="p-3.5 sm:p-4">
+                  <h3 className="text-sm sm:text-base font-bold text-white mb-1 line-clamp-1">{project.title}</h3>
+                  <p className="text-slate-400 text-xs sm:text-xs mb-3 line-clamp-2 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] sm:text-[10px] uppercase tracking-wider font-bold text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="p-3.5 sm:p-4 pt-0">
+                <div className="grid grid-cols-2 gap-2">
                   <a
                     href={project.liveLink}
-                    className="w-full text-center py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-[10px] font-semibold rounded-md transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-center py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-md transition-colors"
                   >
                     Live Demo
                   </a>
                   <a
                     href={project.githubLink}
-                    className="w-full text-center py-1.5 border border-slate-700 hover:border-slate-500 text-slate-300 text-[10px] font-semibold rounded-md transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-center py-2 border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-semibold rounded-md transition-colors"
                   >
                     GitHub
                   </a>

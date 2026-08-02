@@ -24,27 +24,27 @@ const Education = () => {
           Education
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {education.map((edu, index) => (
             <div
               key={index}
-              className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-purple-500/30 transition-all group"
+              className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-900 border border-slate-800 hover:border-purple-500/30 transition-all group"
             >
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-all">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex justify-between items-start mb-4 sm:mb-6">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full">
+                <span className="text-xs sm:text-sm font-medium text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-full ml-2">
                   {edu.period}
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">{edu.degree}</h3>
-              <h4 className="text-lg text-slate-400 mb-4">{edu.institution}</h4>
-              <p className="text-slate-500 leading-relaxed">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2">{edu.degree}</h3>
+              <h4 className="text-sm sm:text-lg text-slate-400 mb-3 sm:mb-4">{edu.institution}</h4>
+              <p className="text-xs sm:text-sm md:text-base text-slate-500 leading-relaxed">
                 {edu.description}
               </p>
             </div>

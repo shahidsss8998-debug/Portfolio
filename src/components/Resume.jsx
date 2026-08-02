@@ -4,6 +4,13 @@ const Resume = () => {
   const experiences = [
     {
       company: 'Aspirasys, Chennai',
+      role: '4-Month Internship in Web Development & Software Engineering',
+      period: 'Oct 2025 – Jan 2026',
+      description: 'Successfully completed a 4-month intensive internship at Aspirasys, gaining in-depth practical experience in full-stack web development, building responsive user interfaces, integrating backend APIs, and deploying production web applications.',
+      certificateLink: '/Certificate of 4 Month Internship.pdf'
+    },
+    {
+      company: 'Aspirasys, Chennai',
       role: '1-Month Internship in Web Development, AI Tools & Deployment',
       period: 'Sep 2025 – Oct 2025',
       description: 'Successfully completed a 1-month internship at Aspirasys, gaining hands-on experience in web development, AI tools, and deployment platforms while building real-world projects including a personal portfolio website.',
@@ -41,7 +48,9 @@ const Resume = () => {
             Work Experience
           </h2>
           <a
-            href="Muhammed_Shahid_P_Frontend_Developer_Resume.pdf"
+            href="/My_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-2 rounded-full bg-slate-800 border border-slate-700 hover:border-purple-500 text-slate-300 hover:text-white transition-all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,30 +60,30 @@ const Resume = () => {
           </a>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-8 sm:space-y-12">
           {experiences.map((exp, index) => (
-            <div key={index} className="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-0.5 before:bg-slate-800">
-              <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-purple-500 translate-x-[-3px]"></div>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3 md:gap-4 mb-3 md:mb-4">
+            <div key={index} className="relative pl-6 sm:pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-0.5 before:bg-slate-800">
+              <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-purple-500 translate-x-[-3.5px]"></div>
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-3">
                 <div>
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-1 leading-snug">{exp.role}</h3>
-                  <h4 className="text-base md:text-lg text-slate-300">{exp.company}</h4>
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-1 leading-snug">{exp.role}</h3>
+                  <h4 className="text-sm sm:text-base md:text-lg text-slate-300">{exp.company}</h4>
                 </div>
-                <div className="flex flex-row md:flex-col items-center md:items-end flex-wrap gap-3 md:gap-2 shrink-0 mt-1 md:mt-0">
-                  <span className="text-purple-400 font-medium text-sm md:text-base">{exp.period}</span>
+                <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2 shrink-0 mt-1 sm:mt-0">
+                  <span className="text-purple-400 font-medium text-xs sm:text-sm md:text-base bg-purple-500/10 px-2.5 py-0.5 rounded-md sm:bg-transparent sm:p-0">{exp.period}</span>
                   {exp.certificateLink && (
                     <a
                       href={exp.certificateLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-1.5 md:px-6 md:py-2 rounded-full bg-slate-800 border border-slate-700 hover:border-purple-500 text-slate-300 hover:text-white transition-all text-xs text-center whitespace-nowrap"
+                      className="px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 rounded-full bg-slate-800 border border-slate-700 hover:border-purple-500 text-slate-300 hover:text-white transition-all text-xs text-center inline-block"
                     >
                       View Certificate
                     </a>
                   )}
                 </div>
               </div>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed max-w-3xl">
+              <p className="text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed max-w-3xl">
                 {exp.description}
               </p>
             </div>

@@ -1,0 +1,9 @@
+{
+  "short_name": "Portfolio",
+  "name": "Muhammed Shahid P Portfolio",
+  "icons": [],
+  "start_url": "/",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "display": "standalone"
+}
