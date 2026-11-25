@@ -26,8 +26,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-white/5">
           {/* Brand Monogram & Title */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-cyan-500 p-[1.5px] shadow-sm">
-              <div className="w-full h-full bg-[#070b1e] rounded-[6px] flex items-center justify-center font-serif italic text-white text-sm">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-purple-600 to-cyan-500 p-[1.5px] shadow-sm">
+              <div className="w-full h-full bg-[#070b1e] rounded-md flex items-center justify-center font-serif italic text-white text-sm">
                 SP
               </div>
             </div>

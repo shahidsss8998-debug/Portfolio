@@ -56,7 +56,7 @@ const replyTemplates = {
     body: "I mainly use React, Node.js, Express, and Figma for design. I also work with MongoDB, PostgreSQL, and various deployment tools. Happy to share more details about my workflow!"
   },
   thankyou: {
-    subject: '🙏 Thank You for Reaching Out! — Muhammed Shahid P',
+    subject: 'Thank You for Reaching Out! — Muhammed Shahid P',
     body: "Thank you so much for reaching out! I really appreciate your kind words and the time you took to write. It means a lot — looking forward to staying connected."
   }
 };
@@ -175,7 +175,7 @@ function buildNotificationEmail({ name, email, message }) {
                   <td align="center" style="padding-bottom: 16px;">
                     <a href="${BASE_URL}/api/reply/thankyou?to=${encodedEmail}&name=${encodedName}"
                        style="display: inline-block; padding: 14px 34px; background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%); color: #ffffff; text-decoration: none; border-radius: 9999px; font-size: 14px; font-weight: 700; letter-spacing: 0.3px; text-align: center; box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5); border: 1px solid rgba(255, 255, 255, 0.25);"
-                       target="_blank">🙏 Thank You for Your Response</a>
+                       target="_blank">Thank You for Your Response</a>
                   </td>
                 </tr>
                 <!-- Secondary Quick Response Shortcuts -->
