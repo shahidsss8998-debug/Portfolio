@@ -12,7 +12,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-let BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+let BASE_URL = process.env.BASE_URL || process.env.RENDER_EXTERNAL_URL || 'https://portfolio-backend-917v.onrender.com';
 let CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:5174';
 
 // Normalize URLs by trimming trailing slashes
@@ -56,7 +56,7 @@ const replyTemplates = {
     body: "I mainly use React, Node.js, Express, and Figma for design. I also work with MongoDB, PostgreSQL, and various deployment tools. Happy to share more details about my workflow!"
   },
   thankyou: {
-    subject: '😊 Thank You!',
+    subject: '🙏 Thank You for Reaching Out! — Muhammed Shahid P',
     body: "Thank you so much for reaching out! I really appreciate your kind words and the time you took to write. It means a lot — looking forward to staying connected."
   }
 };
@@ -67,202 +67,310 @@ function buildNotificationEmail({ name, email, message }) {
   const encodedEmail = encodeURIComponent(email);
   const encodedName = encodeURIComponent(name);
 
-  const actionButtons = [
-    { label: '🙏 Thank You for Your Response', type: 'thankyou', color: '#7c3aed' },
-  ];
-
-  const buttonsHtml = actionButtons.map(btn => `
-    <a href="${BASE_URL}/api/reply/${btn.type}?to=${encodedEmail}&name=${encodedName}"
-       class="action-btn"
-       style="display:inline-block;padding:16px 44px;background-color:#c4956a;color:#0d0d0d;text-decoration:none;border-radius:6px;font-size:14px;font-weight:700;font-family:Georgia,'Times New Roman',serif;margin:6px;text-align:center;letter-spacing:0.5px;"
-       target="_blank">${btn.label}</a>
-  `).join('');
-
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    @media only screen and (max-width: 480px) {
-      .email-wrapper { padding: 12px !important; }
-      .email-container { width: 100% !important; }
-      .header-section { padding: 36px 20px 24px 20px !important; }
-      .header-title { font-size: 26px !important; }
-      .divider-wrap { padding: 0 20px !important; }
-      .sender-section { padding: 24px 20px !important; }
-      .sender-card { display: block !important; width: 100% !important; margin-bottom: 12px !important; }
-      .sender-spacer { display: none !important; }
-      .message-section { padding: 0 20px 28px 20px !important; }
-      .message-box { padding: 18px 20px !important; }
-      .action-section { padding: 28px 20px !important; }
-      .action-btn { padding: 16px 20px !important; width: 100% !important; box-sizing: border-box !important; }
-      .footer-section { padding: 20px 20px 28px 20px !important; }
-    }
-  </style>
+  <title>New Portfolio Message — Muhammed Shahid P</title>
 </head>
-<body style="margin:0;padding:0;font-family:Georgia,'Times New Roman',serif;background-color:#0d0d0d;-webkit-font-smoothing:antialiased;">
-  <div class="email-wrapper" style="padding:0;">
-  <div class="email-container" style="max-width:600px;margin:0 auto;background-color:#0d0d0d;">
+<body style="margin: 0; padding: 0; background-color: #050814; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #f8fafc;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #050814; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <!-- Main Card Container with Glow and Rounded Corners -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 580px; background-color: #080d22; border: 1px solid #1e293b; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(139, 92, 246, 0.1);">
+          
+          <!-- Top Multi-Color Glowing Gradient Bar -->
+          <tr>
+            <td style="height: 4px; background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);"></td>
+          </tr>
 
-    <!-- Header -->
-    <div class="header-section" style="padding:50px 40px 30px 40px;text-align:center;">
-      <p style="margin:0 0 8px 0;color:#c4956a;font-size:12px;text-transform:uppercase;letter-spacing:3px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">Portfolio</p>
-      <h1 class="header-title" style="color:#ffffff;margin:0;font-size:32px;font-weight:400;letter-spacing:-0.5px;line-height:1.3;">New Message<br>Received.</h1>
-    </div>
+          <!-- Header Section with Monogram and Status -->
+          <tr>
+            <td style="padding: 32px 32px 20px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <!-- Monospace Badge -->
+                    <div style="margin-bottom: 12px;">
+                      <span style="display: inline-block; padding: 4px 10px; font-size: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #22d3ee; background-color: rgba(6, 182, 212, 0.12); border: 1px solid rgba(6, 182, 212, 0.32); border-radius: 6px;">
+                        ● PORTFOLIO TRANSMISSION
+                      </span>
+                    </div>
+                    <h1 style="margin: 0 0 6px 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px; line-height: 1.3;">
+                      New Message from <span style="color: #a78bfa;">${name}</span>
+                    </h1>
+                    <p style="margin: 0; font-size: 12px; color: #94a3b8; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">
+                      Source: <span style="color: #38bdf8;">shahid-pf.netlify.app</span>
+                    </p>
+                  </td>
+                  <td align="right" valign="top" style="width: 54px;">
+                    <!-- Monogram Tech Badge -->
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.2)); border: 1px solid rgba(139, 92, 246, 0.45); text-align: center; line-height: 48px; font-family: ui-monospace, monospace; font-weight: 700; font-size: 16px; color: #c084fc; box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);">
+                      &lt;/&gt;
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-    <!-- Divider -->
-    <div class="divider-wrap" style="padding:0 40px;"><div style="height:1px;background-color:#2a2a2a;"></div></div>
+          <!-- Sender Details Grid -->
+          <tr>
+            <td style="padding: 0 32px 18px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0c1333; border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; overflow: hidden;">
+                <tr>
+                  <td style="padding: 14px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="width: 80px;">
+                          <span style="font-size: 10px; font-family: ui-monospace, monospace; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: #64748b;">SENDER</span>
+                        </td>
+                        <td>
+                          <span style="font-size: 14px; font-weight: 600; color: #f1f5f9;">${name}</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 14px 18px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="width: 80px;">
+                          <span style="font-size: 10px; font-family: ui-monospace, monospace; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: #64748b;">EMAIL</span>
+                        </td>
+                        <td>
+                          <a href="mailto:${email}" style="font-size: 14px; font-weight: 500; color: #38bdf8; text-decoration: none;">${email}</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-    <!-- Sender Info -->
-    <div class="sender-section" style="padding:32px 40px;">
-      <!--[if mso]>
-      <table width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="48%" valign="top">
-      <![endif]-->
-      <div class="sender-card" style="display:inline-block;width:47%;vertical-align:top;padding:20px 24px;background-color:#161616;border-radius:8px;box-sizing:border-box;">
-        <p style="margin:0 0 6px 0;color:#666666;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:600;">From</p>
-        <p style="margin:0;color:#ffffff;font-size:16px;font-weight:400;word-break:break-word;">${name}</p>
-      </div>
-      <!--[if mso]>
-      </td><td width="4%">&nbsp;</td><td width="48%" valign="top">
-      <![endif]-->
-      <span class="sender-spacer" style="display:inline-block;width:4%;"></span>
-      <div class="sender-card" style="display:inline-block;width:47%;vertical-align:top;padding:20px 24px;background-color:#161616;border-radius:8px;box-sizing:border-box;">
-        <p style="margin:0 0 6px 0;color:#666666;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:600;">Email</p>
-        <a href="mailto:${email}" style="color:#c4956a;font-size:14px;font-weight:400;text-decoration:none;word-break:break-all;">${email}</a>
-      </div>
-      <!--[if mso]>
-      </td></tr></table>
-      <![endif]-->
-    </div>
+          <!-- Message Body Container -->
+          <tr>
+            <td style="padding: 0 32px 24px 32px;">
+              <div style="margin-bottom: 8px;">
+                <span style="font-size: 10px; font-family: ui-monospace, monospace; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #a78bfa;">
+                  // MESSAGE_PAYLOAD
+                </span>
+              </div>
+              <div style="background-color: #0a1029; border: 1px solid rgba(139, 92, 246, 0.28); border-left: 4px solid #8b5cf6; border-radius: 0 12px 12px 0; padding: 18px 20px;">
+                <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #e2e8f0; white-space: pre-wrap; word-break: break-word;">${message.replace(/\n/g, '<br>')}</p>
+              </div>
+            </td>
+          </tr>
 
-    <!-- Message -->
-    <div class="message-section" style="padding:0 40px 36px 40px;">
-      <p style="margin:0 0 12px 0;color:#666666;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:600;">Message</p>
-      <div class="message-box" style="background-color:#161616;border-left:3px solid #c4956a;padding:24px 28px;border-radius:0 8px 8px 0;">
-        <p style="margin:0;color:#d4d4d4;font-size:15px;line-height:1.8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;white-space:pre-wrap;word-break:break-word;">${message.replace(/\n/g, '<br>')}</p>
-      </div>
-    </div>
+          <!-- Actions Bar -->
+          <tr>
+            <td style="padding: 0 32px 28px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <!-- Compulsory Primary Action Button: Thank You for Your Response -->
+                <tr>
+                  <td align="center" style="padding-bottom: 16px;">
+                    <a href="${BASE_URL}/api/reply/thankyou?to=${encodedEmail}&name=${encodedName}"
+                       style="display: inline-block; padding: 14px 34px; background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%); color: #ffffff; text-decoration: none; border-radius: 9999px; font-size: 14px; font-weight: 700; letter-spacing: 0.3px; text-align: center; box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5); border: 1px solid rgba(255, 255, 255, 0.25);"
+                       target="_blank">🙏 Thank You for Your Response</a>
+                  </td>
+                </tr>
+                <!-- Secondary Quick Response Shortcuts -->
+                <tr>
+                  <td align="center">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="padding: 0 4px;">
+                          <a href="mailto:${email}?subject=${encodeURIComponent('Re: Portfolio Inquiry from ' + name)}&body=${encodeURIComponent('Hi ' + name + ',\n\nThank you for reaching out through my developer portfolio!\n\nBest regards,\nMuhammed Shahid P')}"
+                             style="display: inline-block; padding: 7px 13px; background-color: #0c1333; border: 1px solid rgba(139, 92, 246, 0.3); color: #c084fc; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 600; font-family: ui-monospace, monospace;"
+                             target="_blank">✉️ Direct Reply</a>
+                        </td>
+                        <td style="padding: 0 4px;">
+                          <a href="${BASE_URL}/api/reply/freelance?to=${encodedEmail}&name=${encodedName}"
+                             style="display: inline-block; padding: 7px 13px; background-color: #0c1333; border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 600; font-family: ui-monospace, monospace;"
+                             target="_blank">🚀 Freelance Availability</a>
+                        </td>
+                        <td style="padding: 0 4px;">
+                          <a href="${BASE_URL}/api/reply/pricing?to=${encodedEmail}&name=${encodedName}"
+                             style="display: inline-block; padding: 7px 13px; background-color: #0c1333; border: 1px solid rgba(6, 182, 212, 0.3); color: #22d3ee; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 600; font-family: ui-monospace, monospace;"
+                             target="_blank">💰 Quote Info</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-    <!-- Divider -->
-    <div class="divider-wrap" style="padding:0 40px;"><div style="height:1px;background-color:#2a2a2a;"></div></div>
+          <!-- Footer Bar -->
+          <tr>
+            <td style="padding: 18px 32px; border-top: 1px solid rgba(255, 255, 255, 0.06); background-color: #060919; text-align: center;">
+              <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 600; color: #e2e8f0; letter-spacing: 0.3px;">
+                MUHAMMED SHAHID P <span style="color: #64748b;">·</span> PORTFOLIO SYSTEM
+              </p>
+              <p style="margin: 0; font-size: 11px; color: #64748b; font-family: ui-monospace, monospace;">
+                Kozhikode, Kerala, India · <a href="https://shahid-pf.netlify.app" style="color: #06b6d4; text-decoration: none;">shahid-pf.netlify.app</a>
+              </p>
+            </td>
+          </tr>
 
-    <!-- Action -->
-    <div class="action-section" style="padding:36px 40px;text-align:center;">
-      ${buttonsHtml}
-    </div>
-
-    <!-- Footer -->
-    <div class="footer-section" style="padding:24px 40px 40px 40px;text-align:center;">
-      <div style="height:1px;background-color:#2a2a2a;margin-bottom:24px;"></div>
-      <p style="margin:0;color:#555555;font-size:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-        Received via Portfolio · ${new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-      </p>
-    </div>
-
-  </div>
-  </div>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`;
 }
 
-function buildReplyEmail({ name, type, body }) {
+function buildReplyEmail({ name, body }) {
   const ownerEmail = process.env.EMAIL_USER;
-  const encodedOwnerEmail = encodeURIComponent(ownerEmail);
-
-  const quickReplyButtons = [
-    { label: '🚀 Open to Freelance', subject: 'Freelance Inquiry', body: `Hi Shahid,\n\nI'm interested in hiring you for a freelance project. Here are the details:\n\n- Project: [Describe your project]\n- Timeline: [Expected timeline]\n- Budget: [Your budget range]\n\nLooking forward to hearing from you!\n\nBest regards,\n${name}`, color: '#7c3aed' },
-    { label: '💰 Send Pricing', subject: 'Pricing Request', body: `Hi Shahid,\n\nI'd like to know your pricing for the following:\n\n- Service needed: [Describe the service]\n- Scope: [Project scope details]\n- Timeline: [Desired timeline]\n\nPlease share a custom quote.\n\nThanks,\n${name}`, color: '#2563eb' },
-    { label: '🤝 Open to Collab', subject: 'Collaboration Opportunity', body: `Hi Shahid,\n\nI'd love to collaborate with you on a project!\n\n- Idea: [Describe your idea]\n- Tech Stack: [Technologies involved]\n- Timeline: [Expected timeline]\n\nLet's discuss further!\n\nCheers,\n${name}`, color: '#059669' },
-    { label: '🛠️ Share My Tools', subject: 'Tools & Tech Stack Discussion', body: `Hi Shahid,\n\nI'd love to learn more about the tools and technologies you use.\n\nAlso, here are some tools I've been using:\n\n- [Tool 1]\n- [Tool 2]\n- [Tool 3]\n\nWould love to exchange ideas!\n\nBest,\n${name}`, color: '#d97706' },
-  ];
-
-  const quickReplyHtml = quickReplyButtons.map(btn => `
-    <a href="mailto:${ownerEmail}?subject=${encodeURIComponent(btn.subject)}&body=${encodeURIComponent(btn.body)}"
-       style="display:inline-block;padding:14px 28px;background-color:#c4956a;color:#0d0d0d;text-decoration:none;border-radius:6px;font-size:13px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:6px;text-align:center;min-width:150px;letter-spacing:0.3px;"
-       target="_blank">${btn.label}</a>
-  `).join('');
 
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Response from Muhammed Shahid P</title>
 </head>
-<body style="margin:0;padding:0;font-family:Georgia,'Times New Roman',serif;background-color:#0d0d0d;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:600px;margin:0 auto;background-color:#0d0d0d;">
+<body style="margin: 0; padding: 0; background-color: #050814; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #f8fafc;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #050814; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <!-- Main Card Container with Glow and Rounded Corners -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 580px; background-color: #080d22; border: 1px solid #1e293b; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(139, 92, 246, 0.1);">
+          
+          <!-- Top Multi-Color Glowing Gradient Bar -->
+          <tr>
+            <td style="height: 4px; background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);"></td>
+          </tr>
 
-    <!-- Header -->
-    <div style="padding:50px 40px 30px 40px;text-align:center;">
-      <p style="margin:0 0 8px 0;color:#c4956a;font-size:12px;text-transform:uppercase;letter-spacing:3px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">Shahid</p>
-      <h1 style="color:#ffffff;margin:0;font-size:30px;font-weight:400;letter-spacing:-0.5px;line-height:1.3;">Hey ${name}!</h1>
-      <p style="color:#777777;margin:12px 0 0 0;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:400;">A personal reply from Shahid</p>
-    </div>
+          <!-- Header Section -->
+          <tr>
+            <td style="padding: 32px 32px 20px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <!-- Verified Developer Badge -->
+                    <div style="margin-bottom: 12px;">
+                      <span style="display: inline-block; padding: 4px 10px; font-size: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #a78bfa; background-color: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.32); border-radius: 6px;">
+                        ● MUHAMMED SHAHID P
+                      </span>
+                    </div>
+                    <h1 style="margin: 0 0 6px 0; font-size: 24px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px; line-height: 1.25;">
+                      Hello <span style="color: #38bdf8;">${name}</span>!
+                    </h1>
+                    <p style="margin: 0; font-size: 13px; color: #94a3b8; line-height: 1.5;">
+                      Thank you for reaching out through my developer portfolio.
+                    </p>
+                  </td>
+                  <td align="right" valign="top" style="width: 54px;">
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(59, 130, 246, 0.2)); border: 1px solid rgba(139, 92, 246, 0.45); text-align: center; line-height: 48px; font-family: ui-monospace, monospace; font-weight: 700; font-size: 16px; color: #c084fc; box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);">
+                      SP
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-    <!-- Divider -->
-    <div style="padding:0 40px;"><div style="height:1px;background-color:#2a2a2a;"></div></div>
+          <!-- Message Body Card -->
+          <tr>
+            <td style="padding: 0 32px 24px 32px;">
+              <div style="background-color: #0a1029; border: 1px solid rgba(139, 92, 246, 0.28); border-left: 4px solid #06b6d4; border-radius: 0 12px 12px 0; padding: 20px 22px;">
+                <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.8; color: #f1f5f9; white-space: pre-wrap; word-break: break-word;">${body}</p>
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 14px;">
+                  <p style="margin: 0 0 2px 0; font-size: 13px; font-weight: 600; color: #ffffff;">Muhammed Shahid P</p>
+                  <p style="margin: 0; font-size: 11px; color: #94a3b8; font-family: ui-monospace, monospace;">Frontend & Full-Stack Developer · Kerala, India</p>
+                </div>
+              </div>
+            </td>
+          </tr>
 
-    <!-- Message -->
-    <div style="padding:36px 40px;">
-      <div style="background-color:#161616;border-radius:8px;padding:28px 32px;">
-        <p style="margin:0;color:#d4d4d4;font-size:15px;line-height:1.85;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">${body}</p>
-      </div>
-    </div>
+          <!-- Action Buttons Bar -->
+          <tr>
+            <td style="padding: 0 32px 24px 32px;" align="center">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding: 0 6px;">
+                    <a href="mailto:${ownerEmail}?subject=${encodeURIComponent('Re: Portfolio Discussion')}&body=${encodeURIComponent('Hi Shahid,\n\n')}"
+                       style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%); color: #ffffff; text-decoration: none; border-radius: 9999px; font-size: 13px; font-weight: 700; letter-spacing: 0.2px; text-align: center; box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45); border: 1px solid rgba(255, 255, 255, 0.2);"
+                       target="_blank">Reply to this Email</a>
+                  </td>
+                  <td style="padding: 0 6px;">
+                    <a href="https://shahid-pf.netlify.app"
+                       style="display: inline-block; padding: 11px 22px; background-color: #0c1333; border: 1px solid rgba(139, 92, 246, 0.35); color: #e2e8f0; text-decoration: none; border-radius: 9999px; font-size: 13px; font-weight: 600; text-align: center;"
+                       target="_blank">View Live Portfolio ↗</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-    <!-- Divider -->
-    <div style="padding:0 40px;"><div style="height:1px;background-color:#2a2a2a;"></div></div>
+          <!-- Social Links Strip -->
+          <tr>
+            <td style="padding: 0 32px 22px 32px;" align="center">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding: 0 8px;">
+                    <a href="https://github.com/shahidsss8998-debug" style="color: #94a3b8; text-decoration: none; font-size: 11px; font-family: ui-monospace, monospace;" target="_blank">GitHub</a>
+                  </td>
+                  <td style="color: #475569;">·</td>
+                  <td style="padding: 0 8px;">
+                    <a href="https://www.linkedin.com/in/shahyid/" style="color: #38bdf8; text-decoration: none; font-size: 11px; font-family: ui-monospace, monospace;" target="_blank">LinkedIn</a>
+                  </td>
+                  <td style="color: #475569;">·</td>
+                  <td style="padding: 0 8px;">
+                    <a href="https://wa.me/+917592037434" style="color: #4ade80; text-decoration: none; font-size: 11px; font-family: ui-monospace, monospace;" target="_blank">WhatsApp</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-    <!-- Quick Reply Buttons -->
-    <div style="padding:36px 40px;text-align:center;">
-      <p style="margin:0 0 20px 0;color:#666666;font-size:10px;text-transform:uppercase;letter-spacing:2px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:600;">Quick Reply</p>
-      ${quickReplyHtml}
-    </div>
+          <!-- Footer Bar -->
+          <tr>
+            <td style="padding: 18px 32px; border-top: 1px solid rgba(255, 255, 255, 0.06); background-color: #060919; text-align: center;">
+              <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 600; color: #e2e8f0;">
+                Muhammed Shahid P
+              </p>
+              <p style="margin: 0; font-size: 11px; color: #64748b; font-family: ui-monospace, monospace;">
+                React · Tailwind CSS · Three.js · Node.js · <a href="https://shahid-pf.netlify.app" style="color: #06b6d4; text-decoration: none;">shahid-pf.netlify.app</a>
+              </p>
+            </td>
+          </tr>
 
-    <!-- Divider -->
-    <div style="padding:0 40px;"><div style="height:1px;background-color:#2a2a2a;"></div></div>
-
-    <!-- Custom Message -->
-    <div style="padding:36px 40px;">
-      <div style="background-color:#161616;border-radius:8px;padding:28px 32px;text-align:center;">
-        <p style="margin:0 0 8px 0;color:#ffffff;font-size:15px;font-weight:400;">Write a Custom Reply</p>
-        <p style="margin:0 0 24px 0;color:#777777;font-size:13px;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-          Open your email client with a pre-filled message.
-        </p>
-        <a href="mailto:${ownerEmail}?subject=${encodeURIComponent('Re: Portfolio Contact')}&body=${encodeURIComponent('Hi Shahid,\n\n[Write your message here]\n\nBest regards,\n' + name)}"
-           style="display:inline-block;padding:14px 40px;background-color:#c4956a;color:#0d0d0d;text-decoration:none;border-radius:6px;font-size:14px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;letter-spacing:0.3px;"
-           target="_blank">📧 Open in Email Client</a>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div style="padding:24px 40px 40px 40px;text-align:center;">
-      <div style="height:1px;background-color:#2a2a2a;margin-bottom:24px;"></div>
-      <p style="margin:0 0 6px 0;color:#555555;font-size:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">Shahid — Frontend Developer</p>
-      <p style="margin:0;color:#444444;font-size:11px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">Feel free to reach out anytime!</p>
-    </div>
-
-  </div>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`;
 }
 
 function buildSuccessPage(name) {
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reply Sent</title>
+  <title>Reply Sent — Muhammed Shahid P</title>
 </head>
-<body style="margin:0;padding:0;font-family:Georgia,'Times New Roman',serif;background-color:#0d0d0d;display:flex;align-items:center;justify-content:center;min-height:100vh;-webkit-font-smoothing:antialiased;">
-  <div style="text-align:center;padding:60px 48px;background-color:#161616;border-radius:12px;max-width:420px;margin:20px;">
-    <div style="width:64px;height:64px;background-color:#c4956a;border-radius:50%;margin:0 auto 28px auto;line-height:64px;font-size:32px;color:#0d0d0d;">✓</div>
-    <h1 style="color:#ffffff;font-size:24px;margin:0 0 14px 0;font-weight:400;letter-spacing:-0.3px;">Reply Sent.</h1>
-    <p style="color:#777777;font-size:15px;margin:0 0 32px 0;line-height:1.7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-      Your reply has been sent to <strong style="color:#c4956a;">${name}</strong>.<br>They’ll receive it shortly.
+<body style="margin: 0; padding: 0; background-color: #050814; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; -webkit-font-smoothing: antialiased; color: #f8fafc;">
+  <div style="text-align: center; padding: 48px 36px; background-color: #080d22; border: 1px solid #1e293b; border-radius: 20px; max-width: 440px; margin: 20px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(139, 92, 246, 0.15); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);"></div>
+    <div style="width: 56px; height: 56px; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 50%; margin: 0 auto 20px auto; line-height: 56px; font-size: 24px; color: #22d3ee; box-shadow: 0 0 25px rgba(6, 182, 212, 0.25);">✓</div>
+    <span style="display: inline-block; padding: 4px 10px; font-size: 10px; font-family: ui-monospace, monospace; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #22d3ee; background-color: rgba(6, 182, 212, 0.12); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; margin-bottom: 12px;">
+      TRANSMISSION DELIVERED
+    </span>
+    <h1 style="color: #ffffff; font-size: 22px; font-weight: 700; margin: 0 0 10px 0; letter-spacing: -0.3px;">Reply Dispatched</h1>
+    <p style="color: #94a3b8; font-size: 14px; margin: 0 0 24px 0; line-height: 1.6;">
+      Your automated reply has been sent to <strong style="color: #a78bfa;">${name}</strong>.<br>The email was delivered to their inbox.
     </p>
-    <p style="color:#444444;font-size:13px;margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">You can close this tab now.</p>
+    <a href="https://shahid-pf.netlify.app" style="display: inline-block; padding: 11px 26px; background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%); color: #ffffff; text-decoration: none; border-radius: 9999px; font-size: 13px; font-weight: 600; letter-spacing: 0.3px; box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);">Back to Portfolio</a>
   </div>
 </body>
 </html>`;
@@ -284,12 +392,13 @@ app.post('/api/contact', async (req, res) => {
 
     const html = buildNotificationEmail({ name, email, message });
 
-    // Send email asynchronously in the background to improve frontend response time
-    sendEmail({
+    // Await the email operation so the client receives an accurate success or failure response
+    await sendEmail({
       to: process.env.EMAIL_USER,
-      subject: `📩 New Portfolio Message from ${name}`,
-      html
-    }).catch(err => console.error('❌ Background Email Error:', err));
+      subject: `⚡ [Portfolio Inquiry] New message from ${name}`,
+      html,
+      senderName: 'Portfolio Inquiry'
+    });
 
     res.status(200).json({
       success: true,
@@ -333,7 +442,8 @@ app.get('/api/reply/:type', async (req, res) => {
     await sendEmail({
       to: decodeURIComponent(to),
       subject: template.subject,
-      html
+      html,
+      senderName: 'Muhammed Shahid P'
     });
 
     res.status(200).send(buildSuccessPage(decodedName));
@@ -349,24 +459,22 @@ app.get('/api/reply/:type', async (req, res) => {
   }
 });
 
-// GET /api/test-email — Test email delivery
+// GET /api/test-email — Test email delivery with stylized template
 app.get('/api/test-email', async (req, res) => {
   try {
+    const previewHtml = buildNotificationEmail({
+      name: 'Design Preview (Test)',
+      email: 'visitor@example.com',
+      message: 'This is a live preview of your newly stylized developer portfolio email message. It features the deep navy background (#050814), glowing gradient accent bar (#8b5cf6 -> #3b82f6 -> #06b6d4), terminal message block, and one-click quick actions!'
+    });
+
     await sendEmail({
       to: process.env.EMAIL_USER,
-      subject: '✅ Email Test — Portfolio',
-      html: `
-        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:40px;text-align:center;background-color:#0f172a;">
-          <div style="max-width:480px;margin:0 auto;background-color:#1e293b;padding:40px;border-radius:16px;border:1px solid #334155;">
-            <div style="font-size:48px;margin-bottom:16px;">✅</div>
-            <h1 style="color:#22c55e;font-size:22px;margin:0 0 8px 0;">Email is Working!</h1>
-            <p style="color:#94a3b8;font-size:15px;margin:0;">Brevo HTTP API test passed successfully.</p>
-            <p style="color:#64748b;font-size:13px;margin:16px 0 0 0;">Sent at: ${new Date().toLocaleString()}</p>
-          </div>
-        </div>
-      `
+      subject: '⚡ [Design Preview] Stylized Developer Portfolio Email',
+      html: previewHtml,
+      senderName: 'Portfolio System'
     });
-    res.json({ success: true, message: 'Test email sent successfully' });
+    res.json({ success: true, message: 'Test email sent successfully with updated template' });
   } catch (error) {
     console.error('Test email failed:', error);
     res.status(500).json({ success: false, message: 'Failed to send test email', error: error.message });
@@ -377,6 +485,8 @@ app.get('/api/test-email', async (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', uptime: process.uptime() });
 });
+
+export { buildNotificationEmail, buildReplyEmail, buildSuccessPage };
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

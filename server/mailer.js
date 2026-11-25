@@ -1,4 +1,4 @@
-const sendEmail = async ({ to, subject, html }) => {
+const sendEmail = async ({ to, subject, html, senderName }) => {
   const apiKey = process.env.BREVO_API_KEY;
   const senderEmail = process.env.EMAIL_USER;
 
@@ -10,7 +10,7 @@ const sendEmail = async ({ to, subject, html }) => {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      sender: { name: 'Portfolio Contact', email: senderEmail },
+      sender: { name: senderName || 'Muhammed Shahid P', email: senderEmail },
       to: [{ email: to }],
       subject: subject,
       htmlContent: html,
