@@ -71,7 +71,7 @@ const Hero = () => {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
               <span className="text-[11px] font-mono text-slate-300 tracking-wide">
-                Web Developer · Full-Stack Development Enthusiast
+                Web Developer · Full-Stack Development
               </span>
             </div>
 
